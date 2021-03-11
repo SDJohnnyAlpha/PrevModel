@@ -1,7 +1,7 @@
 window.onload = () => {
     DeviceMotionEvent.requestPermission().then(response => { if (response == 'granted') {window.addEventListener('devicemotion', (e) => {})}}).catch(console.error)
     
-    //let method = 'dynamic';
+   let method = 'dynamic';
 
     // if you want to statically add places, de-comment following line
     let method = 'static';
