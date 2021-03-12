@@ -4,9 +4,9 @@
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>GeoAR.js demo</title>
-    <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
-    <script src='aframe-ar-nft.js'></script>
-
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+    <script src='../../../build/aframe-ar-nft.js'></script>
 </head>
 
 <body style='margin: 0; overflow: hidden;'>
@@ -15,18 +15,22 @@
 		embedded
 		arjs='sourceType: webcam; debugUIEnabled: false;'>
 
-        <!-- too near, is like 2m far -->
-        <a-box material="color: red;" scale="15 15 15" gps-entity-place="latitude: 44.504493; longitude: 11.301134;"></a-box>
+        <!-- ~ 400m far -->
+        <!-- <a-box material="color: red;" scale="5 5 5" gps-entity-place="latitude: 44.506477; longitude: 11.301524;"></a-box> -->
 
-        <!-- visible, is like 400m far -->
-        <a-box material="color: yellow;" scale="15 15 15" gps-entity-place="latitude: 44.506477; longitude: 11.301524;"></a-box>
+        <!-- ~ 20m far -->
+        <!-- <a-image src="place.png" gps-entity-place="latitude: 44.504417; longitude: 11.301317;"
+        ></a-image> -->
 
-        <!-- too far, is like 2.5km far -->
-        <a-box material="color: green;" scale="15 15 15" gps-entity-place="latitude: 44.500013; longitude: 11.277351;"></a-box>
+        <!-- ~ 0m far -->
+        <a-image src="place.png" gps-entity-place="latitude: 44.504348; longitude: 11.301027;"
+            ></a-image>
 
+        <!-- using gpsMinDistance: 5 => update GPS only if user moves by 5 meters or more => avoid shaking for near objects -->
+        <!-- using accelerationToMove: 1.0 => 'smooth' inertial sensors precision precision in order to avoid distant places shaking -->
         <a-camera
             rotation-reader
-            gps-camera="simulateLatitude: 44.504348; simulateLongitude: 11.301027; minDistance: 50; maxDistance: 700;"
+            gps-camera="simulateLatitude: 44.50437; simulateLongitude: 11.30106; gpsMinDistance: 10;"
         >
 		</a-camera>
 	</a-scene>
