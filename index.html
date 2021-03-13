@@ -10,6 +10,7 @@
       window.onload = () => {
         let places = staticLoadPlaces();
         renderPlaces(places);
+	acquireDistance();
       };
       // Loading places from the following static array
       function staticLoadPlaces()
@@ -23,7 +24,7 @@
             }
           },
         ];
-      }
+      } // End of staticLoadPlaces function
       
       function renderPlaces(places)
       {
@@ -33,20 +34,43 @@
           let latitude = place.location.lat;
           let longitude = place.location.lng;
           
-          let geoMarker = document.createElement('a-entity');
-          geoMarker.setAttribute('gps-entity-place', `latitude: 52.2667465209961; longitude: -7.09122848510742;`);
+          //let geoMarker = document.createElement('a-entity');
+          //geoMarker.setAttribute('gps-entity-place', `latitude: 52.2667465209961; longitude: -7.09122848510742;`);
           //geoMarker.setAttribute('gltf-model', './assets/marker.gltf');
-          geoMarker.setAttribute('marker-image', 'places.png');
-          geoMarker.setAttribute('scale', ' 3 3 3');
+          //geoMarker.setAttribute('marker-image', 'places.png');
+          //geoMarker.setAttribute('scale', ' 3 3 3');
 
-          geoMarker.addEventListener('loaded', () => 
-          {
-            window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
+          //geoMarker.addEventListener('loaded', () => 
+          //{
+            //window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
+          //});
+
+          //scene.appendChild(geoMarker);
+		
+		
+	  const icon = document.createElement('a-image');
+
+          icon.setAttribute('gps-entity-place', `latitude: 52.2667465209961; longitude: -7.09122848510742`);
+          icon.setAttribute('name', place.name);
+          icon.setAttribute('src', 'place.png');
+
+          // for debug purposes, just show in a bigger scale, otherwise I have to personally go on places...
+          icon.setAttribute('scale', '20, 20');
+
+          icon.addEventListener('loaded', () => 
+	  {
+		window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
           });
-
-          scene.appendChild(geoMarker);
-       });
-     }
+		
+	  scene.appendChild(icon);
+        } // End of RenderPlaces function
+	
+	function acquireDistance()
+	{
+		const distanceMsg = document.querySelector('[gps-entity-place]').getAttribute('distanceMsg');
+		// Need to place this on a text
+		console.log(distanceMsg);
+	} // End of acquireDistance function
     </script>
 
 </head>
