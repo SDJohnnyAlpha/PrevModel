@@ -10,7 +10,7 @@
       window.onload = () => {
         let places = staticLoadPlaces();
         renderPlaces(places);
-	acquireDistance();
+	//acquireDistance();
       };
       // Loading places from the following static array
       function staticLoadPlaces()
@@ -73,6 +73,7 @@
 	} // End of acquireDistance function
 	      
 	// Attempting to display distance
+	      /*
 	AFRAME.registerComponent('displaydate', {
 
   		init: function()
@@ -80,7 +81,7 @@
     			const distanceMsg = document.querySelector('[gps-entity-place]').getAttribute('distanceMsg');
     			this.el.setAttribute('value', distanceMsg)
   		}
-	})
+	}) */
 
     </script>
 
