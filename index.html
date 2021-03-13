@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>GeoAR.js demo</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src='aframe-ar-nft.js'></script>
+    <script>
+      window.onload = () => {
+        let places = staticLoadPlaces();
+        renderPlaces(places);
+      };
+      // Loading places from the following static array
+      function staticLoadPlaces()
+      {
+        return[
+          {
+            name: 'Homebase'.
+            location: {
+            lat: 52.2667465209961,
+            lng: -7.09122848510742;
+            }
+          },
+        ];
+      }
+      
+      function renderPlaces(places)
+      {
+        let scene = document.querySelector('a-scene');
+        
+        places.forEach(place) => {
+          let latitude = place.location.lat;
+          let longitude = place.location.lng;
+          
+          let geoMarker = document.createElement('a-entity');
+          geoMarker.setAttribute('gps-entity-place', `latitude: 52.2667465209961; longitude: -7.09122848510742;`);
+          //geoMarker.setAttribute('gltf-model', './assets/marker.gltf');
+          geoMarker.setAttribute('marker-image', 'places.png');
+          geoMarker.setAttribute('scale', ' 3 3 3');
+
+          geoMarker.addEventListener('loaded', () => 
+          {
+            window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
+          });
+
+          scene.appendChild(geoMarker);
+       });
+     }
+    </script>
+
+</head>
+  
+<body style='margin: 0; overflow: hidden;'>
+  <a-scene
+        vr-mode-ui="enabled: false"
+		embedded
+		arjs='sourceType: webcam; debugUIEnabled: false;'>
+        <a-camera
+            rotation-reader
+            gps-camera="gpsMinDistance: 10;"
+        >
+		</a-camera>
+	</a-scene>
+</body>
